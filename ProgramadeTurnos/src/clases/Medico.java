@@ -5,24 +5,40 @@
  */
 package clases;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Nati
  */
 public class Medico {
 
+    private String cedula;
     private String nombres;
     private String apellidos;
     private int edad;
     private String genero;
     private String especialidad;
 
-    public Medico(String nombres, String apellidos, int edad, String genero, String especialidad) {
+    public Medico(String cedula, String nombres, String apellidos, int edad, String genero, String especialidad) {
+        this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.edad = edad;
         this.genero = genero;
         this.especialidad = especialidad;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getNombres() {
@@ -67,11 +83,7 @@ public class Medico {
 
     @Override
     public String toString() {
-        return "Medico{" + "nombres=" + nombres + ", apellidos=" + apellidos + ", edad=" + edad + ", genero=" + genero + ", especialidad=" + especialidad + '}';
+        return "Medico{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", edad=" + edad + ", genero=" + genero + ", especialidad=" + especialidad + '}';
     }
-    
-    
-    
-    
-    
+
 }
