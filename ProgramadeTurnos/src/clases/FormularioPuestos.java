@@ -6,13 +6,18 @@
 package clases;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Set;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -28,137 +33,216 @@ import javax.swing.JOptionPane;
 public class FormularioPuestos {
 
     private VBox root;
-    private List<Puesto> puestos;
+    private Set<Puesto> puestos;
     private static List<Medico> medicos;
 
     public FormularioPuestos() {
         puestos = Puesto.cargarPuesto();
-        try {
-            root = new VBox();
-            root.setSpacing(15);
-            root.setAlignment(Pos.BASELINE_CENTER);
-            mostrarMenuPuesto();
-        } catch (IOException | RuntimeException e) {
-            root.getChildren().clear();
-            root.getChildren().add(new Label("Ha ocurrido un error"));
-            root.getChildren().add(new Label(e.getMessage()));
-        }
+        root = new VBox();
+        root.setSpacing(15);
+        root.setAlignment(Pos.BASELINE_CENTER);
+        mostrarMenuPuesto();
     }
 
     public VBox getRoot() {
         return root;
     }
 
-    public void mostrarMenuPuesto() throws IOException {
-        root.getChildren().clear();
-        Image img = new Image(new FileInputStream("admP119-2.png"));
-        ImageView imgv = new ImageView(img);
-        imgv.setFitHeight(125);
-        Button crear = new Button("Crear");
-        crear.setOnAction((ActionEvent event) -> {
-            try {
-                mostrarVentanaCrear();
-            } catch (IOException ex) {
-                root.getChildren().clear();
-                root.getChildren().add(new Label("Ha ocurrido un error"));
-            }
-        });
-        Button eliminar = new Button("Eliminar");
-        eliminar.setOnAction((ActionEvent event) -> {
-            mostrarVentanaEliminar();
-        });
-        Button editar = new Button("Editar");
-        eliminar.setOnAction((ActionEvent event) -> {
-            mostrarVentanaEditar();
-        });
-        HBox linea = new HBox(crear, eliminar, editar);
-        Button regresar = new Button("Volver");
-        regresar.setOnAction((ActionEvent event) -> {
-            regresarMenu();
-        });
-        root.getChildren().addAll(imgv, linea, regresar);
+    public Set<Puesto> getPuestos() {
+        return puestos;
     }
 
-    public void mostrarVentanaCrear() throws IOException {
-        root.getChildren().clear();
-        Image img = new Image(new FileInputStream("crear.png"));
-        ImageView imgv = new ImageView(img);
-        imgv.setFitHeight(125);
-        Label l1 = new Label("ID: ");
-        TextField id = new TextField();
-        HBox c1 = new HBox(l1, id);
-        Label l2 = new Label("Asignar medico (Opcional): ");
-        TextField ced = new TextField("Ingrese cedula");
-        HBox c2 = new HBox(l2, ced);
-        Button b1 = new Button("Crear");
-        root.getChildren().addAll(c1, c2, b1);
-        b1.setOnAction((ActionEvent event) -> {
-            boolean select = true;
-            Medico m = buscarMedicos(ced.getText());
-            for (Puesto p : puestos) {
-                if (p.getIdPuesto().equals(id.getText())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe ese id\nVuelva a llenar los datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
-                    try {
+    public void mostrarMenuPuesto() {
+        try {
+            root.getChildren().clear();
+            Image img = new Image(new FileInputStream("admP119-2.png"));
+            ImageView imgv = new ImageView(img);
+            imgv.setFitHeight(125);
+            Button crear = new Button("Crear");
+            crear.setOnAction((ActionEvent event) -> {
+                mostrarVentanaCrear();
+            });
+            Button eliminar = new Button("Eliminar");
+            eliminar.setOnAction((ActionEvent event) -> {
+                mostrarVentanaEliminar();
+            });
+            Button editar = new Button("Editar");
+            editar.setOnAction((ActionEvent event) -> {
+                mostrarVentanaEditar();
+            });
+            HBox linea = new HBox(crear, eliminar, editar);
+            linea.setAlignment(Pos.BASELINE_CENTER);
+            linea.setSpacing(30);
+            Button regresar = new Button("Volver");
+            regresar.setOnAction((ActionEvent event) -> {
+                regresarMenu();
+            });
+            root.getChildren().addAll(imgv, linea, regresar);
+        } catch (IOException ex) {
+            regresarMenu();
+        }
+    }
+
+    public void mostrarVentanaCrear() {
+        try {
+            root.getChildren().clear();
+            Button b2 = new Button("Volver");
+            b2.setOnAction((ActionEvent event) -> {
+                mostrarMenuPuesto();
+            });
+            Image img = new Image(new FileInputStream("crear.PNG"));
+            ImageView imgv = new ImageView(img);
+            Label l1 = new Label("ID: ");
+            TextField id = new TextField();
+            HBox c1 = new HBox(l1, id);
+            Label l2 = new Label("Asignar medico (Opcional): ");
+            TextField ced = new TextField("Ingrese cedula");
+            HBox c2 = new HBox(l2, ced);
+            Button b1 = new Button("Crear");
+            root.getChildren().addAll(imgv, c1, c2, b1, b2);
+            b1.setOnAction((ActionEvent event) -> {
+                boolean select = false;
+                Medico m = buscarMedicos(ced.getText());
+                for (Puesto p : puestos) {
+                    if (p.getIdPuesto().equals(id.getText())) {
+                        select = true;
+                        JOptionPane.showMessageDialog(null, "Ya existe ese id\nVuelva a llenar los datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
                         mostrarVentanaCrear();
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "ERROR", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                        break;
                     }
                 }
-            }
-            if (m == null) {
-                Puesto p = new Puesto(id.getText());
-                JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nNo ingresó medico", "Puesto creado", JOptionPane.PLAIN_MESSAGE);
-            } else {
-                Puesto p = new Puesto(id.getText(), m);
-                JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nMedico: Dr/a. " + m.getApellidos(), "Puesto creado", JOptionPane.PLAIN_MESSAGE);
-            }
-
-        });
+                if (!select) {
+                    if (m == null) {
+                        Puesto p = new Puesto(id.getText());
+                        Puesto.anadirPuesto(p);
+                        puestos.add(p);
+                        JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nNo ingresó medico", "Puesto creado", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        Puesto p = new Puesto(id.getText(), m);
+                        Puesto.anadirPuesto(p);
+                        puestos.add(p);
+                        JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nMedico: Dr/a. " + m.getApellidos(), "Puesto creado", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+            });
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Problema", "Advertencia", JOptionPane.ERROR_MESSAGE);
+            regresarMenu();
+        }
     }
 
     public void mostrarVentanaEliminar() {
-        root.getChildren().clear();
+        try {
+            root.getChildren().clear();
+            List<Puesto> lp = buscarPuesto(false);
+            Image img = new Image(new FileInputStream("elm.PNG"));
+            ImageView imgv = new ImageView(img);
+            ComboBox<Puesto> cpuestos = new ComboBox<>();
+            cpuestos.setItems(FXCollections.observableArrayList(lp));
+            HBox h = new HBox(new Label("Selccionar puesto a eliminar: "), cpuestos);
+            EventHandler<ActionEvent> e = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    Puesto p = cpuestos.getValue();
+                    if (JOptionPane.showConfirmDialog(null, "Seguro eliminar Puesto# " + p.getIdPuesto() + "?", "WARNING",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        puestos.remove(p);
+                        p.eliminarPuesto();
+                    } else {
+                        mostrarVentanaEliminar();
+                    }
+                }
+            };
+            cpuestos.setOnAction(e);
+            Button b1 = new Button("Volver");
+            b1.setOnAction((ActionEvent event) -> {
+                mostrarMenuPuesto();
+            });
+            root.getChildren().addAll(imgv, h, b1);
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Problema", "Advertencia", JOptionPane.ERROR_MESSAGE);
+            regresarMenu();
+        }
+
     }
 
     public void mostrarVentanaEditar() {
         root.getChildren().clear();
         TextField id = new TextField();
-        HBox h = new HBox(new Label("Ingrese ID:"), id);
+        HBox h = new HBox(new Label("Ingrese ID: "), id);
         Button b1 = new Button("Ingresar");
-        root.getChildren().addAll(new Label("Añadir médico"), h, b1);
         b1.setOnAction((ActionEvent event) -> {
+            boolean pls = false;
             for (Puesto p : puestos) {
                 if (p.getIdPuesto().equals(id.getText())) {
+                    if (p.getMedicoA() != null) {
+                        pls = true;
+                        break;
+                    }
                     TextField ced = new TextField();
-                    HBox h1 = new HBox(new Label("Ingrese cédula del Medico:"), ced);
+                    HBox h1 = new HBox(new Label("Ingrese cédula del Medico: "), ced);
                     Button b2 = new Button("Aceptar");
                     root.getChildren().addAll(h1, b2);
                     b2.setOnAction((ActionEvent e) -> {
                         Medico m = buscarMedicos(ced.getText());
-                        if (m == null) {
-                            JOptionPane.showMessageDialog(null, "Medico no existe", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                        if (m == null | tienePuestoMedico(m.getCedula())) {
+                            JOptionPane.showMessageDialog(null, "Medico no disponible", "Advertencia", JOptionPane.ERROR_MESSAGE);
                             mostrarVentanaEditar();
-                        }else{
-                        p.setMedicoA(m);
-                        Label l1=new Label("Medico correctamente asignado");
-                       root.getChildren().add(l1);
+                        } else {
+                            p.setMedicoA(m);
+                            root.getChildren().add(new Label("Medico correctamente asignado"));
                         }
                     });
+                    break;
                 }
             }
+            if (pls == true) {
+                JOptionPane.showMessageDialog(null, "Error al ingresar datos\nVolver a ingresar", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                mostrarVentanaEditar();
+            }
+
         });
+        Button b2 = new Button("Volver");
+        b2.setOnAction((ActionEvent event) -> {
+            mostrarMenuPuesto();
+        });
+        root.getChildren().addAll(new Label("Añadir médico"), h, b1, b2);
     }
 
     public void regresarMenu() {
-
+//HACER ESTE CUANDO ESTE LO DE ALEJANDRA
     }
 
     public static Medico buscarMedicos(String ced) {
+        medicos = new LinkedList<>();
         for (Medico c : medicos) {
             if (c.getCedula().equals(ced)) {
                 return c;
             }
         }
         return null;
+    }
+
+    public List<Puesto> buscarPuesto(boolean est) {
+        LinkedList<Puesto> d = new LinkedList<>();
+        for (Puesto c : puestos) {
+            if (c.isOcupado() == est) {
+                d.add(c);
+            }
+        }
+        return d;
+    }
+
+    /*
+    Verificar que cada medico solo tenga 1 puesto.
+    Retorna true si ya tiene un puesto
+     */
+    public boolean tienePuestoMedico(String ced) {
+        for (Puesto c : puestos) {
+            if (c.getMedicoA().getCedula() == null ? ced == null : c.getMedicoA().getCedula().equals(ced)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

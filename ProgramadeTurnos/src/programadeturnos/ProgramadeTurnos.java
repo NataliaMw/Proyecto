@@ -6,11 +6,15 @@
  */
 package programadeturnos;
 
+import clases.FormularioPuestos;
+import clases.Puesto;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -31,14 +35,11 @@ public class ProgramadeTurnos extends Application {
         btn.setOnAction((ActionEvent event) -> {
             System.out.println("Hello World!");
         });
-        
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
+        root.getChildren().addAll(btn);
+        Scene sc = new Scene(new FormularioPuestos().getRoot(), 730, 300);
         primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(sc);
         primaryStage.show();
     }
 
