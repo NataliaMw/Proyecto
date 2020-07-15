@@ -5,10 +5,17 @@
  */
 package clases;
 
+import java.util.List;
+import java.util.Set;
+import javafx.scene.layout.VBox;
+
 /**
  *
  * @author Nati
  */
 public class FormularioAtencion {
-    
+
+    private VBox root;
+    private Set<Puesto> puestos;
+    private static List<Medico> medicos;
 }
