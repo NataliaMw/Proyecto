@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.espol.edu.util;
+package ec.edu.espol.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -103,6 +104,12 @@ public class FormularioPuestos {
             b1.setOnAction((ActionEvent event) -> {
                 boolean select = false;
                 Medico m = buscarMedicos(ced.getText());
+                System.out.print(id.getText());
+                if ("".equals(id.getText())) {
+                    select = true;
+                    JOptionPane.showMessageDialog(null, "No ha ingresado datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                    mostrarVentanaCrear();
+                }
                 for (Puesto p : puestos) {
                     if (p.getIdPuesto().equals(id.getText())) {
                         select = true;
@@ -134,7 +141,7 @@ public class FormularioPuestos {
     public void mostrarVentanaEliminar() {
         try {
             root.getChildren().clear();
-            List<Puesto> lp = buscarPuesto(false);
+            Set<Puesto> lp = buscarPuesto(false);
             Image img = new Image(new FileInputStream("elm.PNG"));
             ImageView imgv = new ImageView(img);
             ComboBox<Puesto> cpuestos = new ComboBox<>();
@@ -223,8 +230,8 @@ public class FormularioPuestos {
         return null;
     }
 
-    public List<Puesto> buscarPuesto(boolean est) {
-        LinkedList<Puesto> d = new LinkedList<>();
+    public Set<Puesto> buscarPuesto(boolean est) {
+        Set<Puesto> d = new TreeSet<>();
         for (Puesto c : puestos) {
             if (c.isOcupado() == est) {
                 d.add(c);

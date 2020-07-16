@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.espol.edu.common;
+package ec.edu.espol.common;
 
-import ec.espol.edu.util.FormularioPuestos;
+import ec.edu.espol.util.FormularioPuestos;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -31,7 +31,8 @@ public class ProgramadeTurnos extends Application{
         });
         StackPane root = new StackPane();
         root.getChildren().addAll(btn);
-        Scene sc = new Scene(new FormularioPuestos().getRoot(), 730, 300);
+        Scene sc = new Scene(new FormularioPuestos().getRoot(), 730, 320);
+        sc.getStylesheets().add("ec/edu/espol/common/tr.css");
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(sc);
         primaryStage.show();
