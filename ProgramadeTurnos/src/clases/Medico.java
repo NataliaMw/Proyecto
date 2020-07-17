@@ -103,10 +103,8 @@ public class Medico implements Comparable<Medico> {
         try ( BufferedReader bf = new BufferedReader(new FileReader("src/recursos/datos del medico.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
-                String p[] = linea.split(",");
-                
+                String p[] = linea.split(",");     
                     t.add(new Medico(p[0]));
-                
             }
             return t;
         } catch (IOException ex) {

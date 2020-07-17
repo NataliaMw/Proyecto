@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -38,9 +39,12 @@ public class FormularioPuestos {
 
     public FormularioPuestos() {
         puestos = Puesto.cargarPuesto();
+        //DESCOMENTAR CUANDO SE REALICE EL CARGAR MEDICOS
+        //  medicos= Medico.cargarMedicos();
         root = new VBox();
         root.setSpacing(15);
         root.setAlignment(Pos.BASELINE_CENTER);
+        root.getStylesheets().add("ec/edu/espol/common/tr.css");
         mostrarMenuPuesto();
     }
 
@@ -103,6 +107,12 @@ public class FormularioPuestos {
             b1.setOnAction((ActionEvent event) -> {
                 boolean select = false;
                 Medico m = buscarMedicos(ced.getText());
+                System.out.print(id.getText());
+                if ("".equals(id.getText())) {
+                    select = true;
+                    JOptionPane.showMessageDialog(null, "No ha ingresado datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                    mostrarVentanaCrear();
+                }
                 for (Puesto p : puestos) {
                     if (p.getIdPuesto().equals(id.getText())) {
                         select = true;
@@ -117,6 +127,9 @@ public class FormularioPuestos {
                         Puesto.anadirPuesto(p);
                         puestos.add(p);
                         JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nNo ingresó medico", "Puesto creado", JOptionPane.PLAIN_MESSAGE);
+                    } else if (tienePuestoMedico(m.getCedula())) {
+                        JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nEse medico ya tiene un puesto asignado", "VOLVER A CARGAR DATOS", JOptionPane.PLAIN_MESSAGE);
+                        mostrarVentanaCrear();
                     } else {
                         Puesto p = new Puesto(id.getText(), m);
                         Puesto.anadirPuesto(p);
@@ -134,7 +147,7 @@ public class FormularioPuestos {
     public void mostrarVentanaEliminar() {
         try {
             root.getChildren().clear();
-            List<Puesto> lp = buscarPuesto(false);
+            Set<Puesto> lp = buscarPuesto(false);
             Image img = new Image(new FileInputStream("elm.PNG"));
             ImageView imgv = new ImageView(img);
             ComboBox<Puesto> cpuestos = new ComboBox<>();
@@ -214,7 +227,7 @@ public class FormularioPuestos {
     }
 
     public static Medico buscarMedicos(String ced) {
-        medicos = new LinkedList<>();
+        // medicos = new LinkedList<>();
         for (Medico c : medicos) {
             if (c.getCedula().equals(ced)) {
                 return c;
@@ -223,8 +236,8 @@ public class FormularioPuestos {
         return null;
     }
 
-    public List<Puesto> buscarPuesto(boolean est) {
-        LinkedList<Puesto> d = new LinkedList<>();
+    public Set<Puesto> buscarPuesto(boolean est) {
+        Set<Puesto> d = new TreeSet<>();
         for (Puesto c : puestos) {
             if (c.isOcupado() == est) {
                 d.add(c);
