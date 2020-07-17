@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package interfaz;
 
+import TDAs.Medico;
+import TDAs.Puesto;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

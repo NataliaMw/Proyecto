@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package interfaz;
 
+import TDAs.Turno;
 import programadeturnos.ProgramadeTurnos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
