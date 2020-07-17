@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -92,6 +93,23 @@ public class Medico implements Comparable<Medico> {
     @Override
     public String toString() {
         return "Medico{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", edad=" + edad + ", genero=" + genero + ", especialidad=" + especialidad + '}';
+    }
+    
+    public static List<Medico> listaMedicos(){
+        List<Medico> lmedicos= new LinkedList<>();
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/recursos/datos del medico.txt"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String p[] = linea.split(",");
+                
+                    lmedicos.add(new Medico(p[0],p[1],p[2],Integer.valueOf(p[3]),p[4],p[5]));
+                
+            }
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return lmedicos;                
     }
 
     @Override
