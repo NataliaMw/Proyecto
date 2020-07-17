@@ -84,6 +84,7 @@ public class FormularioPaciente {
             String sintoma=t4.getText();
             String datos= nombre+","+apellido+","+edad+","+genero+","+sintoma;
             generarArchivo(datos);
+            
         });
         
         

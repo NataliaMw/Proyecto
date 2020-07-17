@@ -5,17 +5,22 @@
  */
 package clases;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
  * @author Nati
  */
-public class Medico {
+public class Medico implements Comparable<Medico> {
 
     private String cedula;
     private String nombres;
@@ -31,6 +36,9 @@ public class Medico {
         this.edad = edad;
         this.genero = genero;
         this.especialidad = especialidad;
+    }
+    public Medico(String cedula){
+        this.cedula = cedula;
     }
 
     public String getCedula() {
@@ -85,5 +93,52 @@ public class Medico {
     public String toString() {
         return "Medico{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", edad=" + edad + ", genero=" + genero + ", especialidad=" + especialidad + '}';
     }
+
+    @Override
+    public int compareTo(Medico t) {
+        return cedula.compareTo(t.cedula);
+    }
+    public static Set<Medico> cargarMedico() {
+        Set<Medico> t = new TreeSet<>();
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/recursos/datos del medico.txt"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String p[] = linea.split(",");
+                
+                    t.add(new Medico(p[0]));
+                
+            }
+            return t;
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.cedula);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Medico other = (Medico) obj;
+        if (!Objects.equals(this.cedula, other.cedula)) {
+            return false;
+        }
+        return true;
+    }
+    
 
 }

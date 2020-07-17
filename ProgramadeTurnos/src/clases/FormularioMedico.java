@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,6 +39,7 @@ public class FormularioMedico {
         crearVistaMedico();
     }
     public void crearVistaMedico(){
+        root.getChildren().clear();
         guardar=new Button("Guardar");
         Label paciente= new Label("  DATOS DEL MEDICO  ");
         paciente.setTextFill(Color.WHITE);
@@ -88,7 +90,23 @@ public class FormularioMedico {
             String genero=t3.getText();
             String especialidad=t4.getText();
             String datos= cedula+","+nombre+","+apellido+","+edad+","+genero+","+especialidad;
-            generarArchivo(datos);
+            
+            boolean e = false;
+            
+            for(Medico m:Medico.cargarMedico()){
+                
+                if(m.getCedula().equals(cedula)){
+                    JOptionPane.showMessageDialog(null, "Ya existe ese numero de cedula\nVuelva a llenar los datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                    e= true;
+                     break;
+                }                   
+                
+            }
+            if (!e) {
+                    generarArchivo(datos);
+                }
+            
+           crearVistaMedico();
         });
         
     }
