@@ -39,9 +39,12 @@ public class FormularioPuestos {
 
     public FormularioPuestos() {
         puestos = Puesto.cargarPuesto();
+        //DESCOMENTAR CUANDO SE REALICE EL CARGAR MEDICOS
+        //  medicos= Medico.cargarMedicos();
         root = new VBox();
         root.setSpacing(15);
         root.setAlignment(Pos.BASELINE_CENTER);
+        root.getStylesheets().add("ec/edu/espol/common/tr.css");
         mostrarMenuPuesto();
     }
 
@@ -124,6 +127,9 @@ public class FormularioPuestos {
                         Puesto.anadirPuesto(p);
                         puestos.add(p);
                         JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nNo ingresó medico", "Puesto creado", JOptionPane.PLAIN_MESSAGE);
+                    } else if (tienePuestoMedico(m.getCedula())) {
+                        JOptionPane.showMessageDialog(null, "ID: " + id.getText() + "\nEse medico ya tiene un puesto asignado", "VOLVER A CARGAR DATOS", JOptionPane.PLAIN_MESSAGE);
+                        mostrarVentanaCrear();
                     } else {
                         Puesto p = new Puesto(id.getText(), m);
                         Puesto.anadirPuesto(p);
@@ -221,7 +227,7 @@ public class FormularioPuestos {
     }
 
     public static Medico buscarMedicos(String ced) {
-        medicos = new LinkedList<>();
+        // medicos = new LinkedList<>();
         for (Medico c : medicos) {
             if (c.getCedula().equals(ced)) {
                 return c;

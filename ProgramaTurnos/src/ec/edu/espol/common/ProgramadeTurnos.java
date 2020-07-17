@@ -5,11 +5,15 @@
  */
 package ec.edu.espol.common;
 
+import ec.edu.espol.util.FormularioAtencion;
+import ec.edu.espol.util.FormularioMedico;
 import ec.edu.espol.util.FormularioPuestos;
+import ec.edu.espol.util.Turno;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -24,16 +28,9 @@ public class ProgramadeTurnos extends Application{
      */
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction((ActionEvent event) -> {
-            System.out.println("Hello World!");
-        });
-        StackPane root = new StackPane();
-        root.getChildren().addAll(btn);
-        Scene sc = new Scene(new FormularioPuestos().getRoot(), 730, 320);
-        sc.getStylesheets().add("ec/edu/espol/common/tr.css");
-        primaryStage.setTitle("Hello World!");
+        Scene sc = new Scene(new FormularioAtencion(new Turno()).getRoot(), 900, 700);
+        primaryStage.setTitle("PROGRAMA DE TURNOS");
+        primaryStage.getIcons().add(new Image("file:icono.png"));
         primaryStage.setScene(sc);
         primaryStage.show();
     }
