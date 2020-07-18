@@ -44,15 +44,19 @@ public class FormularioAtencion {
     private ScrollPane sp;
     private Turno turno;
     private Button registro;
+    private TextArea receta;
+    private TextArea diagnostico;
 
     public FormularioAtencion(Turno turno) {
-        this.turno = turno;
+       this.turno = turno;
         root = new BorderPane();
         sp = new ScrollPane();
         panelFinal = new HBox();
         panelCentro = new VBox();
         panelizq = new VBox();
-        registro=new Button("Registrar");
+        receta = new TextArea();
+        diagnostico = new TextArea();
+        registro = new Button("Registrar");
         root.getStylesheets().add("src/programadeturnos/tr.css");
         crearPanelTop();
         crearPanelCentro();
