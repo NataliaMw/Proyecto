@@ -15,13 +15,11 @@ public class Turno {
     private Puesto puesto;
     private String idTurno;
 
-    public Turno(Medico medico, Paciente paciente, Puesto puesto) {
+    public Turno(Medico medico, Paciente paciente, Puesto puesto, String id) {
         this.medico = medico;
         this.paciente = paciente;
         this.puesto = puesto;
-    }
-
-    public Turno() {
+        idTurno=id;
     }
 
     public String getIdTurno() {

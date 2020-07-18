@@ -10,5 +10,7 @@ package interfaz;
  * @author John
  */
 public class PanelTurnos {
+    //Un puesto debe ponerse en estado ocupado si se va a enviar un paciente a la cita
+    //Un puesto solo puede ser añadido a turno si tiene un medico encargado
     
 }

@@ -39,6 +39,7 @@ public class ProgramadeTurnos extends Application {
         });
         StackPane root = new StackPane();
         root.getChildren().addAll(btn);
+        primaryStage.getIcons().add(new Image("file:icono.png"));
         Scene sc = new Scene(new FormularioPuestos().getRoot(), 730, 300);
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(sc);

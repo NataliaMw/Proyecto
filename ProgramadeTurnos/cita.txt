@@ -1,0 +1,1 @@
+IdTurno;Doctor;Especialidad;Paciente;Sintomas;Diagnostico;Receta

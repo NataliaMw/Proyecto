@@ -99,10 +99,11 @@ public class Medico implements Comparable<Medico> {
         List<Medico> lmedicos= new LinkedList<>();
         try ( BufferedReader bf = new BufferedReader(new FileReader("src/recursos/datos del medico.txt"))) {
             String linea;
+            bf.readLine();
             while ((linea = bf.readLine()) != null) {
                 String p[] = linea.split(",");
                 
-                    lmedicos.add(new Medico(p[0],p[1],p[2],Integer.valueOf(p[3]),p[4],p[5]));
+                    lmedicos.add(new Medico(p[0],p[1],p[2],Integer.parseInt(p[3]),p[4],p[5]));
                 
             }
             

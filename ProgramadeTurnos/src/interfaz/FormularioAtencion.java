@@ -6,9 +6,12 @@
 package interfaz;
 
 import TDAs.Turno;
+import java.io.BufferedWriter;
 import programadeturnos.ProgramadeTurnos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -26,6 +29,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,14 +53,14 @@ public class FormularioAtencion {
         panelCentro = new VBox();
         panelizq = new VBox();
         registro=new Button("Registrar");
-        root.getStylesheets().add("ec/edu/espol/common/tr.css");
+        root.getStylesheets().add("src/programadeturnos/tr.css");
         crearPanelTop();
         crearPanelCentro();
         crearPanelDatos();
         crearPanelFinal();
     }
 
-    public BorderPane getRoot() {
+   public BorderPane getRoot() {
         return root;
     }
 
@@ -74,37 +78,62 @@ public class FormularioAtencion {
     }
 
     private void crearPanelCentro() {
-        TextArea receta = new TextArea();
-        TextArea diagnostico = new TextArea();
-       if(receta.getText()!=null){
-       registro.setDisable(false);
-       }
-        panelCentro.getChildren().addAll(new Label("Receta"), receta, new Label("Diagnostico"), diagnostico);
+        panelCentro.getChildren().addAll(new Label("Diagnóstico"), diagnostico, new Label("Receta"), receta);
         panelCentro.setSpacing(20);
         sp.setContent(panelCentro);
         root.setCenter(sp);
     }
 
     private void crearPanelDatos() {
-        Button b1 = new Button("BOTON be");
-        Label l1 = new Label("TURNO #1");
-        // Label l1=new Label("TURNO "+turno.getIdTurno());
-        //  Label l2=new Label("Paciente: "+turno.getPaciente().getNombres()+" "+turno.getPaciente().getApellidos());
-        Label l2 = new Label("Paciente: Andrew Suarez");
+        Label l0 = new Label("PUESTO " + turno.getPuesto().getIdPuesto().toUpperCase());
+        Label l1 = new Label("TURNO " + turno.getIdTurno().toUpperCase());
+        Label l2 = new Label("Paciente: ");
+        Label l21 = new Label(turno.getPaciente().getNombres() + " " + turno.getPaciente().getApellidos());
+        l21.setStyle("-fx-text-fill: BLACK");
+        Label l3 = new Label("Doctor: ");
+        Label l31 = new Label(turno.getMedico().getNombres() + " " + turno.getMedico().getApellidos());
+        l31.setStyle("-fx-text-fill: BLACK");
+        Label l4 = new Label("ÁREA DE " + turno.getMedico().getEspecialidad().toUpperCase());
         panelizq.setAlignment(Pos.TOP_CENTER);
-        panelizq.getChildren().addAll(l1, l2, b1);
-        root.setLeft(panelizq);
+        panelizq.setSpacing(20);
+        panelizq.getChildren().addAll(l0, l1, l2, l21, l3, l31, l4);
+        HBox hd = new HBox(new Label(""), panelizq);
+        root.setLeft(hd);
     }
 
     public void VolverMenu() {
+
     }
 
     private void crearPanelFinal() {
-        registro.setDisable(true);
-        Button b2 = new Button("Registrar");
+        registro.setOnAction((ActionEvent e) -> {
+            if (receta.getText().isBlank() || diagnostico.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "No se ha ingresado datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
+            } else {
+                generarArchivo(receta.getText(), diagnostico.getText());
+                turno.getPuesto().setOcupado(false);
+                JOptionPane.showMessageDialog(null, "Cita finalizada\nPuesto " + turno.getPuesto().getIdPuesto() + " liberado", "Cita generada", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        Button b2 = new Button("Regresar");
+        b2.setOnAction((ActionEvent e) -> {
+            VolverMenu();
+        });
+
         panelFinal.getChildren().addAll(b2, registro);
         panelFinal.setAlignment(Pos.CENTER);
         panelFinal.setSpacing(80);
         root.setBottom(panelFinal);
+    }
+
+    public void generarArchivo(String receta, String diagnostico) {
+//CAMBIAR A CEDULA
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("cita.txt", true))) {
+            bw.write(turno.getIdTurno() + ";" + turno.getMedico().getCedula() + ";"
+                    + turno.getMedico().getEspecialidad() + ";" + turno.getPaciente().getApellidos()
+                    + ";" + turno.getPaciente().getSintoma() + ";" + diagnostico + ";" + receta + "\n");
+        } catch (IOException ex) {
+            System.out.print(ex.getMessage());
+        }
     }
 }
