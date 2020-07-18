@@ -42,10 +42,10 @@ public class FormularioMedico {
     public void crearVistaMedico(){
         root.getChildren().clear();
         guardar=new Button("Guardar");
-        Label paciente= new Label("  DATOS DEL MEDICO  ");
-        paciente.setTextFill(Color.WHITE);
-        //#52EC54"
-        paciente.setStyle("-fx-background-color: #52EC54; -fx-font-color: WHITE; -fx-font-size: 20;-fx-font-family: Segoe UI Black; -fx-font-weight : bold 3px");
+        Label medico= new Label("  DATOS DEL MEDICO  ");
+        medico.setTextFill(Color.WHITE);
+        
+        medico.setStyle("-fx-background-color: #52EC54; -fx-font-color: WHITE; -fx-font-size: 20;-fx-font-family: Segoe UI Black; -fx-font-weight : bold 3px");
         guardar.setStyle("-fx-text-fill: WHITE; -fx-font-size: 14; -fx-font-family: Segoe UI Black; -fx-background-color: #2522C6");
         HBox contenedor= new HBox();
         VBox seccionLabel = new VBox();
@@ -56,7 +56,7 @@ public class FormularioMedico {
         Label l2= new Label("Edad:");
         Label l3= new Label("Genero:");
         Label l4= new Label("Especialidad:");
-        seccionLabel.getChildren().addAll(paciente,l5,l,l1,l2,l3,l4);
+        seccionLabel.getChildren().addAll(medico,l5,l,l1,l2,l3,l4);
         seccionLabel.setSpacing(20);
         seccionLabel.setAlignment(Pos.CENTER);
         seccionLabel.setStyle("-fx-text-fill: BLACK; -fx-font-size: 15;-fx-font-family: Segoe UI Black");
@@ -81,7 +81,7 @@ public class FormularioMedico {
         contenedor.getChildren().addAll(seccionLabel,seccionText);
         contenedor.setAlignment(Pos.CENTER);
         contenedor.setSpacing(15);
-        root.getChildren().addAll(paciente,contenedor,guardar);
+        root.getChildren().addAll(medico,contenedor,guardar);
         
         guardar.setOnAction(eb->{
             String cedula=t5.getText();
