@@ -40,7 +40,7 @@ public class FormularioPuestos {
     public FormularioPuestos() {
         puestos = Puesto.cargarPuesto();
         //DESCOMENTAR CUANDO SE REALICE EL CARGAR MEDICOS
-        //  medicos= Medico.cargarMedicos();
+          medicos= Medico.listaMedicos();
         root = new VBox();
         root.setSpacing(15);
         root.setAlignment(Pos.BASELINE_CENTER);
@@ -198,7 +198,7 @@ public class FormularioPuestos {
                     root.getChildren().addAll(h1, b2);
                     b2.setOnAction((ActionEvent e) -> {
                         Medico m = buscarMedicos(ced.getText());
-                        if (m == null | tienePuestoMedico(m.getCedula())) {
+                        if (m == null || tienePuestoMedico(m.getCedula())) {
                             JOptionPane.showMessageDialog(null, "Medico no disponible", "Advertencia", JOptionPane.ERROR_MESSAGE);
                             mostrarVentanaEditar();
                         } else {
@@ -213,7 +213,6 @@ public class FormularioPuestos {
                 JOptionPane.showMessageDialog(null, "Error al ingresar datos\nVolver a ingresar", "Advertencia", JOptionPane.ERROR_MESSAGE);
                 mostrarVentanaEditar();
             }
-
         });
         Button b2 = new Button("Volver");
         b2.setOnAction((ActionEvent event) -> {

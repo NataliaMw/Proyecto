@@ -11,7 +11,7 @@ and open the template in the editor.
 .label {
     -fx-font-size: 12pt;
     -fx-font-family: "Arial Black";
-    -fx-text-fill: seagreen;
+    -fx-text-fill: navy;
     -fx-opacity: 0.6;
 }
 

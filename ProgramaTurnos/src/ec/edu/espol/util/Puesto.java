@@ -85,9 +85,13 @@ public class Puesto implements Comparable<Puesto> {
         try {
             String texto = "";
             if (p.medicoA == null) {
-                texto = p.idPuesto;
+                texto = p.idPuesto + "\n";
             } else {
-                texto = p.idPuesto + ";" + p.medicoA.getCedula();
+                if (p.ocupado) {
+                    texto = p.idPuesto + ";" + p.medicoA.getCedula() + ";" + p.ocupado + "\n";
+                } else {
+                    texto = p.idPuesto + ";" + p.medicoA.getCedula() + "\n";
+                }
             }
             Path path = Paths.get("puestos.txt");
             Files.write(path, texto.getBytes(), StandardOpenOption.APPEND);
@@ -112,7 +116,11 @@ public class Puesto implements Comparable<Puesto> {
                 } else {
                     Medico m = FormularioPuestos.buscarMedicos(p[1]);
                     if (m != null) {
-                        t.add(new Puesto(p[0], m));
+                        Puesto pp = new Puesto(p[0], m);
+                        t.add(pp);
+                        if (p.length == 3) {
+                            pp.setOcupado(true);
+                        }
                     }
                 }
             }

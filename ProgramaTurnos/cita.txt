@@ -1,0 +1,2 @@
+IdTurno;Doctor;Especialidad;Paciente;Sintomas;Diagnostico;Receta
+A055;0985647754;Fiebrelogiaxd;Castro Macias;Fiebre;Fiebre xd;2 paracetamol

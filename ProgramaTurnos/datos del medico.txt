@@ -1,10 +1,3 @@
 Cedula,Nombre,Apellido,edad,genero,especialidad
 0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
-0985562615,Jorge Domingo,Dominguez Gomez,38,Masculino,Cardiologia
+0987563362,Norma,Asanza,45,Femenino,Cardiologia

@@ -8,6 +8,9 @@ package ec.edu.espol.common;
 import ec.edu.espol.util.FormularioAtencion;
 import ec.edu.espol.util.FormularioMedico;
 import ec.edu.espol.util.FormularioPuestos;
+import ec.edu.espol.util.Medico;
+import ec.edu.espol.util.Paciente;
+import ec.edu.espol.util.Puesto;
 import ec.edu.espol.util.Turno;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -28,7 +31,10 @@ public class ProgramadeTurnos extends Application{
      */
     @Override
     public void start(Stage primaryStage) {
-        Scene sc = new Scene(new FormularioAtencion(new Turno()).getRoot(), 900, 700);
+        //PRUEBA BORRAR DATOS DESPUES y en el archivo tmb
+        Medico mediP=new Medico("0985647754","Jinna Miriam","Martinex Cedeño",45,"Femenino","Fiebrelogiaxd");
+        Paciente prueba=new Paciente("Jorge Daniel","Castro Macias",45,"Masculino","Fiebre");
+        Scene sc = new Scene(new FormularioAtencion(new Turno(mediP,prueba,new Puesto("001"),"A055")).getRoot(), 900, 700);
         primaryStage.setTitle("PROGRAMA DE TURNOS");
         primaryStage.getIcons().add(new Image("file:icono.png"));
         primaryStage.setScene(sc);
