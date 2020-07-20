@@ -62,7 +62,7 @@ public class FormularioTurnos extends Application{
         
     public FormularioTurnos(){
         turn = 0;
-        turnos = new PriorityQueue<>((Turno t1, Turno t2)->Inicio.riesgos.get(t1.getPaciente().getSintoma())-Inicio.riesgos.get(t2.getPaciente().getSintoma()));
+        turnos = new PriorityQueue<>((Turno t1, Turno t2)->Inicio.riesgos.get(t2.getPaciente().getSintoma())-Inicio.riesgos.get(t1.getPaciente().getSintoma()));
         listaVideos = cargarVideos();
         puesto = new Label("  PUESTOS  ");
         turno = new Label("  TURNOS  ");
