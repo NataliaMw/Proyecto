@@ -124,6 +124,7 @@ PanelPrincipal pp = new PanelPrincipal();
             } else {
                 generarArchivo(receta.getText(), diagnostico.getText());
                 turno.getPuesto().setOcupado(false);
+                Inicio.turno=null;
                 JOptionPane.showMessageDialog(null, "Cita finalizada\nPuesto " + turno.getPuesto().getIdPuesto() + " liberado", "Cita generada", JOptionPane.PLAIN_MESSAGE);
                 VolverMenu();
             }
