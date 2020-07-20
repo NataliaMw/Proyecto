@@ -117,6 +117,7 @@ public class FormularioAtencion {
                 generarArchivo(receta.getText(), diagnostico.getText());
                 turno.getPuesto().setOcupado(false);
                 JOptionPane.showMessageDialog(null, "Cita finalizada\nPuesto " + turno.getPuesto().getIdPuesto() + " liberado", "Cita generada", JOptionPane.PLAIN_MESSAGE);
+           VolverMenu();
             }
         });
         Button b2 = new Button("Regresar");
