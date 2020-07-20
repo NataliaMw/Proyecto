@@ -176,8 +176,8 @@ public class FormularioTurnos extends Application{
     
     
     public void mostrarVideos(){
-        vid.setFitHeight(400);
-        vid.setFitWidth(200);
+        vid.setFitHeight(700);
+        vid.setFitWidth(500);
         hv = new hiloVideos();
         Thread hilo = new Thread(hv);
         hilo.start();
@@ -219,7 +219,7 @@ public class FormularioTurnos extends Application{
                         
                     });
                 try {
-                    Thread.sleep(15000);
+                    Thread.sleep(19900);
                     vid.getMediaPlayer().stop();
                 } catch (InterruptedException ex) {
                     System.out.println("Errror");
