@@ -1,0 +1,2 @@
+Cedula,Nombre,Apellido,edad,genero,especialidad
+0985562615,Jorge,Jimenez,47,Masculino,Cardiologia

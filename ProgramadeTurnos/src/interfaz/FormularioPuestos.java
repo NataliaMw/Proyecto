@@ -233,7 +233,6 @@ PanelPrincipal pp = new PanelPrincipal();
 
     public static Medico buscarMedicos(String ced) {
         // medicos = new LinkedList<>();
-        System.out.println("MIERDAAAA"+medicos);
         for (Medico c : medicos) {
             if (c.getCedula().equals(ced)) {
                 return c;
@@ -258,7 +257,10 @@ PanelPrincipal pp = new PanelPrincipal();
      */
     public boolean tienePuestoMedico(String ced) {
         for (Puesto c : puestos) {
-            if (c.getMedicoA().getCedula() == null ? ced == null : c.getMedicoA().getCedula().equals(ced)) {
+            if(c.getMedicoA()==null){
+            return false;
+            }
+            if (c.getMedicoA().getCedula().equals(ced)) {
                 return true;
             }
         }
