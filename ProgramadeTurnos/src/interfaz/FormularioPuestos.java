@@ -37,12 +37,10 @@ import javax.swing.JOptionPane;
 public class FormularioPuestos {
 
     private VBox root;
-    private Set<Puesto> puestos;
+    private Set<Puesto> puestos = Puesto.cargarPuesto();;
     private static LinkedList<Medico> medicos = Medico.listaMedicos();
 
     public FormularioPuestos() {
-        puestos = Puesto.cargarPuesto();
-        //DESCOMENTAR CUANDO SE REALICE EL CARGAR MEDICOS
         //medicos = Medico.listaMedicos();
         System.out.println(medicos);
         root = new VBox();
