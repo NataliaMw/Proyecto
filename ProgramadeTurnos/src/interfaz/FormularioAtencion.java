@@ -82,23 +82,27 @@ public class FormularioAtencion {
     }
 
     private void crearPanelCentro() {
-        /*
         panelCentro.getChildren().addAll(new Label("Diagnóstico"), diagnostico, new Label("Receta"), receta);
         panelCentro.setSpacing(20);
         sp.setContent(panelCentro);
-        root.setCenter(sp);*/
+        root.setCenter(sp);
     }
 
     private void crearPanelDatos() {
         Label l0 = new Label("PUESTO " + turno.getPuesto().getIdPuesto().toUpperCase());
+        l0.setStyle("-fx-text-fill: BLUE; -fx-font-size: 12;-fx-font-family: Arial Black");
         Label l1 = new Label("TURNO " + turno.getIdTurno().toUpperCase());
+        l1.setStyle("-fx-text-fill: BLUE; -fx-font-size: 12;-fx-font-family: Arial Black");
         Label l2 = new Label("Paciente: ");
+        l2.setStyle("-fx-text-fill: BLUE; -fx-font-size: 12;-fx-font-family: Arial Black");
         Label l21 = new Label(turno.getPaciente().getNombres() + " " + turno.getPaciente().getApellidos());
-        l21.setStyle("-fx-text-fill: BLACK");
+        l21.setStyle("-fx-text-fill: BLACK; -fx-font-size: 12;-fx-font-family: Arial Black");
         Label l3 = new Label("Doctor: ");
+        l3.setStyle("-fx-text-fill: BLUE; -fx-font-size: 12;-fx-font-family: Arial Black");
         Label l31 = new Label(turno.getMedico().getNombres() + " " + turno.getMedico().getApellidos());
-        l31.setStyle("-fx-text-fill: BLACK");
+        l31.setStyle("-fx-text-fill: BLACK; -fx-font-size: 12;-fx-font-family: Arial Black");
         Label l4 = new Label("ÁREA DE " + turno.getMedico().getEspecialidad().toUpperCase());
+        l4.setStyle("-fx-text-fill: BLUE; -fx-font-size: 12;-fx-font-family: Arial Black");
         panelizq.setAlignment(Pos.TOP_CENTER);
         panelizq.setSpacing(20);
         panelizq.getChildren().addAll(l0, l1, l2, l21, l3, l31, l4);
