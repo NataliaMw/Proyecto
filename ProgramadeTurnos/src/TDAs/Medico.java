@@ -95,14 +95,16 @@ public class Medico implements Comparable<Medico> {
         return "Medico{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", edad=" + edad + ", genero=" + genero + ", especialidad=" + especialidad + '}';
     }
     
-    public static List<Medico> listaMedicos(){
-        List<Medico> lmedicos= new LinkedList<>();
+    public static LinkedList<Medico> listaMedicos(){
+        System.out.println("PRUEBAAAA");
+        LinkedList<Medico> lmedicos = new LinkedList<>();
         try ( BufferedReader bf = new BufferedReader(new FileReader("src/recursos/datos del medico.txt"))) {
+            System.out.println("PRUEBAAAA");
             String linea;
             bf.readLine();
             while ((linea = bf.readLine()) != null) {
                 String p[] = linea.split(",");
-                
+                    System.out.println("PRUEBAAAA");
                     lmedicos.add(new Medico(p[0],p[1],p[2],Integer.parseInt(p[3]),p[4],p[5]));
                 
             }

@@ -8,15 +8,12 @@
 
 package programadeturnos;
 
-import interfaz.FormularioPuestos;
-import TDAs.Puesto;
+import interfaz.*;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -26,24 +23,17 @@ import javafx.stage.Stage;
  */
 public class ProgramadeTurnos extends Application {
     
+    
     /**
      *
      * @param primaryStage
      */
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction((ActionEvent event) -> {
-            System.out.println("Hello World!");
-        });
-        StackPane root = new StackPane();
-        root.getChildren().addAll(btn);
         primaryStage.getIcons().add(new Image("file:icono.png"));
-        Scene sc = new Scene(new FormularioPuestos().getRoot(), 730, 300);
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(sc);
-        primaryStage.show();
+        primaryStage.setTitle("Programa de turnos");
+        PanelPrincipal pp = new PanelPrincipal();
+        pp.start(primaryStage);
     }
 
     /**

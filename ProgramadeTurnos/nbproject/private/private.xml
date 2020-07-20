@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Hp%20Corporations/Documents/programadeturnos/ProgramadeTurnos/src/clases/FormularioMedico.java</file>
-            <file>file:/C:/Users/Hp%20Corporations/Documents/programadeturnos/ProgramadeTurnos/src/clases/Medico.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/TDAs/Turno.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/TDAs/Paciente.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/TDAs/Puesto.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/interfaz/FormularioAtencion.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/programadeturnos/ProgramadeTurnos.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/interfaz/PanelTurnos.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/TDAs/Medico.java</file>
+            <file>file:/C:/Users/Nati/Desktop/programadeturnos/ProgramadeTurnos/src/interfaz/FormularioPuestos.java</file>
         </group>
     </open-files>
 </project-private>

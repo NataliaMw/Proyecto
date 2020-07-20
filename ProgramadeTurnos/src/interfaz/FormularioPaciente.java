@@ -19,7 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import programadeturnos.Inicio;
 
 /**
  *
@@ -79,7 +81,14 @@ public class FormularioPaciente {
         contenedor.getChildren().addAll(seccionLabel,seccionText);
         contenedor.setAlignment(Pos.CENTER);
         contenedor.setSpacing(15);
-        root.getChildren().addAll(paciente,contenedor,guardar);
+        Button volver = new Button("Volver");
+        volver.setStyle("-fx-text-fill: WHITE; -fx-font-size: 14; -fx-font-family: Segoe UI Black; -fx-background-color: #2522C6");
+        root.getChildren().addAll(paciente, contenedor, volver , guardar);
+        
+        volver.setOnAction(eb -> {
+            volverMenu();
+        });
+        
         guardar.setStyle("-fx-text-fill: BLACK; -fx-font-size: 14; -fx-font-family: Segoe UI Black; -fx-background-color: #52EC54");
         guardar.setOnAction(eb->{
             String cedula=t5.getText();
@@ -89,15 +98,20 @@ public class FormularioPaciente {
             String genero=t3.getText();
             String sintoma=t4.getText();
             String datos= cedula+","+nombre+","+apellido+","+edad+","+genero+","+sintoma;
+            Paciente pa = new Paciente(cedula,nombre,apellido,Integer.valueOf(edad),genero,sintoma);
+            Inicio.pacientes.add(pa);
             //generarArchivo(datos);
             boolean e = false;
+            if(Paciente.cargarPaciente()!=null){
             for(Paciente p:Paciente.cargarPaciente()){
                 if(p.getCedula().equals(cedula)){
                     JOptionPane.showMessageDialog(null, "Ya existe ese numero de cedula\nVuelva a llenar los datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
                     e= true;
                      break;
                 } 
+            }    
             }
+            
             if (!e) {
                     generarArchivo(datos);
                 }
@@ -109,6 +123,11 @@ public class FormularioPaciente {
     }
     public VBox getRoot(){
         return root;
+    }
+    private void volverMenu(){
+        PanelPrincipal pp = new PanelPrincipal();
+       root.getScene().getWindow().hide();
+        pp.start(new Stage());
     }
     public void generarArchivo(String datos){
         File fl = new File("src/recursos/datos del paciente.txt");

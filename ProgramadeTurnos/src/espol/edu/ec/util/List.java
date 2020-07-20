@@ -10,20 +10,17 @@ package espol.edu.ec.util;
  * @author Cotrina
  */
 public interface List <E> {
-     boolean isEmpty();
-    int size();
-    boolean addFirst(E e);
-    boolean addLast(E e);
-    boolean removeFirst();
-    boolean removeLast();
-    E remove(int ind);
-    boolean remove(E e);
-    E get(int index);
+    boolean addFirst(E e); //agregar al principio de la lista
+    boolean addLast (E e); //agregar al final de la lista
     E getFirst();
     E getLast();
-    E set(int index, E e);
+    int indexOf(E e);
+    int size();
+    boolean removeLast(); 
+    boolean removeFirst();
     boolean insert(int index, E e);
-    boolean contains(E e);
-    boolean concatenate(Object collection);
+    boolean isEmpty();
+    E get (int index);
+    boolean contains (E e);
     
 }

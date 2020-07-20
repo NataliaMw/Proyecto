@@ -120,7 +120,6 @@ public class CircularSimplyLinkedList<E> implements List<E>, Iterable<E>{
         return false;
     }
 
-    @Override
     public E remove(int ind) {
         
         if(isEmpty() || ind<0 || ind>=efectivo) return null;
@@ -149,7 +148,7 @@ public class CircularSimplyLinkedList<E> implements List<E>, Iterable<E>{
         return null;
     }
 
-    @Override
+
     public boolean remove(E e) {
         
         if(e==null) return false;
@@ -410,6 +409,11 @@ public class CircularSimplyLinkedList<E> implements List<E>, Iterable<E>{
                 return e;
             }
         };       
+    }
+
+    @Override
+    public int indexOf(E e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

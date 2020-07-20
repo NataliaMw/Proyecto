@@ -118,6 +118,7 @@ public class Paciente implements Comparable<Paciente>{
     public static List<Paciente> listaPacientes(){
         List<Paciente> lpacientes= new LinkedList<>();
         try ( BufferedReader bf = new BufferedReader(new FileReader("src/recursos/datos del paciente.txt"))) {
+            bf.readLine();
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String p[] = linea.split(",");

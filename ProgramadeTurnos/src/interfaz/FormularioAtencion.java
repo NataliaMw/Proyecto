@@ -7,7 +7,7 @@ package interfaz;
 
 import TDAs.Turno;
 import java.io.BufferedWriter;
-import programadeturnos.ProgramadeTurnos;
+import programadeturnos.Inicio;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -82,10 +82,11 @@ public class FormularioAtencion {
     }
 
     private void crearPanelCentro() {
+        /*
         panelCentro.getChildren().addAll(new Label("Diagnóstico"), diagnostico, new Label("Receta"), receta);
         panelCentro.setSpacing(20);
         sp.setContent(panelCentro);
-        root.setCenter(sp);
+        root.setCenter(sp);*/
     }
 
     private void crearPanelDatos() {
@@ -106,18 +107,21 @@ public class FormularioAtencion {
     }
 
     public void VolverMenu() {
-
+PanelPrincipal pp = new PanelPrincipal();
+       root.getScene().getWindow().hide();
+        pp.start(new Stage());
     }
 
     private void crearPanelFinal() {
+        
         registro.setOnAction((ActionEvent e) -> {
-            if (receta.getText().isBlank() || diagnostico.getText().isBlank()) {
+            if (receta.getText().trim().isEmpty() || diagnostico.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No se ha ingresado datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
             } else {
                 generarArchivo(receta.getText(), diagnostico.getText());
                 turno.getPuesto().setOcupado(false);
                 JOptionPane.showMessageDialog(null, "Cita finalizada\nPuesto " + turno.getPuesto().getIdPuesto() + " liberado", "Cita generada", JOptionPane.PLAIN_MESSAGE);
-           VolverMenu();
+                VolverMenu();
             }
         });
         Button b2 = new Button("Regresar");
@@ -131,11 +135,10 @@ public class FormularioAtencion {
         root.setBottom(panelFinal);
     }
 
-    public void generarArchivo(String receta, String diagnostico) {
-//CAMBIAR A CEDULA
+public void generarArchivo(String receta, String diagnostico) {
         try ( BufferedWriter bw = new BufferedWriter(new FileWriter("cita.txt", true))) {
             bw.write(turno.getIdTurno() + ";" + turno.getMedico().getCedula() + ";"
-                    + turno.getMedico().getEspecialidad() + ";" + turno.getPaciente().getApellidos()
+                    + turno.getMedico().getEspecialidad() + ";" + turno.getPaciente().getCedula()
                     + ";" + turno.getPaciente().getSintoma() + ";" + diagnostico + ";" + receta + "\n");
         } catch (IOException ex) {
             System.out.print(ex.getMessage());

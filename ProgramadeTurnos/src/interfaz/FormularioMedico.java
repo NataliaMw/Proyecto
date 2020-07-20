@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -81,7 +82,13 @@ public class FormularioMedico {
         contenedor.getChildren().addAll(seccionLabel,seccionText);
         contenedor.setAlignment(Pos.CENTER);
         contenedor.setSpacing(15);
-        root.getChildren().addAll(medico,contenedor,guardar);
+         Button volver = new Button("Volver");
+        volver.setStyle("-fx-text-fill: WHITE; -fx-font-size: 14; -fx-font-family: Segoe UI Black; -fx-background-color: #2522C6");
+        root.getChildren().addAll(medico, contenedor, volver , guardar);
+        
+        volver.setOnAction(eb -> {
+            volverMenu();
+        });
         
         guardar.setOnAction(eb->{
             String cedula=t5.getText();
@@ -93,16 +100,17 @@ public class FormularioMedico {
             String datos= cedula+","+nombre+","+apellido+","+edad+","+genero+","+especialidad;
             
             boolean e = false;
-            
-            for(Medico m:Medico.cargarMedico()){
-                
+            if(Medico.cargarMedico()!=null){
+            for(Medico m:Medico.cargarMedico()){                
                 if(m.getCedula().equals(cedula)){
                     JOptionPane.showMessageDialog(null, "Ya existe ese numero de cedula\nVuelva a llenar los datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
                     e= true;
                      break;
                 }                   
                 
+            }    
             }
+            
             if (!e) {
                     generarArchivo(datos);
                 }
@@ -131,5 +139,11 @@ public class FormularioMedico {
         } catch (IOException ex) {
             Logger.getLogger(FormularioMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void volverMenu() {
+        PanelPrincipal pp = new PanelPrincipal();
+       root.getScene().getWindow().hide();
+        pp.start(new Stage());
     }
 }

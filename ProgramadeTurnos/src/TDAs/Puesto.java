@@ -32,8 +32,7 @@ import java.util.stream.Stream;
  * @author Nati
  */
 public class Puesto implements Comparable<Puesto> {
-
-    private String idPuesto;
+  private String idPuesto;
     private boolean ocupado;
     private Medico medicoA;
 

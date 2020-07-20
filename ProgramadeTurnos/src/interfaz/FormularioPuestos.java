@@ -27,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,16 +38,17 @@ public class FormularioPuestos {
 
     private VBox root;
     private Set<Puesto> puestos;
-    private static List<Medico> medicos;
+    private static LinkedList<Medico> medicos = Medico.listaMedicos();
 
     public FormularioPuestos() {
         puestos = Puesto.cargarPuesto();
         //DESCOMENTAR CUANDO SE REALICE EL CARGAR MEDICOS
-         medicos= Medico.listaMedicos();
+        //medicos = Medico.listaMedicos();
+        System.out.println(medicos);
         root = new VBox();
         root.setSpacing(15);
         root.setAlignment(Pos.BASELINE_CENTER);
-        root.getStylesheets().add("sr/programadeturnos/tr.css");
+        //root.getStylesheets().add("src/programadeturnos/tr.css");
         mostrarMenuPuesto();
     }
 
@@ -224,11 +226,14 @@ public class FormularioPuestos {
     }
 
     public void regresarMenu() {
-//HACER ESTE CUANDO ESTE LO DE ALEJANDRA
+PanelPrincipal pp = new PanelPrincipal();
+       root.getScene().getWindow().hide();
+        pp.start(new Stage());
     }
 
     public static Medico buscarMedicos(String ced) {
         // medicos = new LinkedList<>();
+        System.out.println("MIERDAAAA"+medicos);
         for (Medico c : medicos) {
             if (c.getCedula().equals(ced)) {
                 return c;
