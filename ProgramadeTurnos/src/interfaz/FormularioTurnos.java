@@ -213,7 +213,7 @@ public class FormularioTurnos extends Application{
                         //mp.setAutoPlay(true);                        
                         vid.setMediaPlayer(mp);
                         mp.play();
-                        System.out.println("LLOROOOOOO: "+String.valueOf(vid.getMediaPlayer().getTotalDuration()));
+                        System.out.println(String.valueOf(vid.getMediaPlayer().getTotalDuration()));
                         //tiempo = Long.valueOf(String.valueOf(vid.getMediaPlayer().getTotalDuration()));  
                         //mp.setAutoPlay(true);
                         
@@ -243,8 +243,6 @@ public class FormularioTurnos extends Application{
          //Turno t1 = new Turno(e.getMedicoA(),new Paciente(),e,turnoCod());
          //turnos.add(t1);
          });
-         
-        
     }
     public class Tiempo implements Runnable{
         
